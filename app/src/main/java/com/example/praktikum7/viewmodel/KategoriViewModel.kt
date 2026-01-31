@@ -42,6 +42,10 @@ class KategoriViewModel(private val repositoriPerpustakaan: RepositoriPerpustaka
         }
     }
 
+    fun getAllKategori(): Flow<List<Kategori>> {
+        return repositoriPerpustakaan.getAllKategori()
+    }
+
     fun getHierarchicalCategories(): Flow<List<KategoriWithLevel>> {
         return repositoriPerpustakaan.getAllKategoriHierarchical()
     }

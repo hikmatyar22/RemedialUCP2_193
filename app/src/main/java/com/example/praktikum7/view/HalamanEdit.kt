@@ -24,8 +24,7 @@ fun EditSiswaScreen(
     viewModel: EditViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ) {
     val coroutineScope = rememberCoroutineScope()
-    
-    // Collect Categories
+
     val pilihanKategori by viewModel.kategoriList.collectAsState()
 
     Scaffold(
@@ -40,7 +39,7 @@ fun EditSiswaScreen(
     ) { innerPadding ->
         EntryBukuBody(
             uiStateBuku = viewModel.uiStateBuku,
-            kategoriList = pilihanKategori, // Pass list here
+            kategoriList = pilihanKategori,
             onBukuValueChange = viewModel::updateUIState,
             onSaveClick = {
                 coroutineScope.launch {

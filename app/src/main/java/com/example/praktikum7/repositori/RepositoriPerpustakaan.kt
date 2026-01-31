@@ -13,7 +13,7 @@ interface RepositoriPerpustakaan {
     fun getKategori(id: Int): Flow<Kategori?>
     suspend fun insertKategori(kategori: Kategori)
     suspend fun updateKategori(kategori: Kategori)
-    suspend fun deleteKategori(categoryId: Int, deleteBooks: Boolean) : Boolean // Boolean = Success
+    suspend fun deleteKategori(categoryId: Int, deleteBooks: Boolean) : Boolean
 
     // New hierarchical category methods
     fun getAllKategoriHierarchical(): Flow<List<KategoriWithLevel>>

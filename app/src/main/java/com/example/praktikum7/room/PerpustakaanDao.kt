@@ -125,7 +125,6 @@ interface PerpustakaanDao {
     @Query("UPDATE tblAsetBuku SET isDeleted = 1 WHERE id = :id")
     suspend fun softDeleteAsetBuku(id: Int)
 
-    // Additional recursive category methods for hierarchical navigation
     @Query("""
         WITH RECURSIVE CategoryTree AS (
             SELECT id, nama, deskripsi, parentId, 0 as level 
@@ -173,16 +172,16 @@ interface PerpustakaanDao {
 
     @Query("""
         WITH RECURSIVE CategoryPath AS (
-            SELECT id, nama, deskripsi, parentId, 0 as depth
+            SELECT id, nama, deskripsi, parentId, 0 as level
             FROM tblKategori 
             WHERE id = :categoryId AND isDeleted = 0
             UNION ALL
-            SELECT k.id, k.nama, k.deskripsi, k.parentId, cp.depth + 1
+            SELECT k.id, k.nama, k.deskripsi, k.parentId, cp.level + 1
             FROM tblKategori k
             INNER JOIN CategoryPath cp ON k.id = cp.parentId
             WHERE k.isDeleted = 0
         )
-        SELECT * FROM CategoryPath ORDER BY depth DESC
+        SELECT * FROM CategoryPath ORDER BY level DESC
     """)
     suspend fun getCategoryPath(categoryId: Int): List<KategoriWithLevel>
 }

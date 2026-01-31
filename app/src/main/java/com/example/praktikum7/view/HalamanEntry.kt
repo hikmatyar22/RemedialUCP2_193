@@ -50,14 +50,13 @@ import kotlinx.coroutines.launch
 @Composable
 fun EntrySiswaScreen(
     navigateBack: () -> Unit,
-    onNavigateToKategori: () -> Unit, // Add this
+    onNavigateToKategori: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: EntryViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ) {
     val coroutineScope = rememberCoroutineScope()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
-    
-    // Collect Categories
+
     val pilihanKategori by viewModel.kategoriList.collectAsState()
 
     Scaffold (
@@ -84,7 +83,7 @@ fun EntrySiswaScreen(
     ) { innerPadding ->
         EntryBukuBody(
             uiStateBuku = viewModel.uiStateBuku,
-            kategoriList = pilihanKategori, // Pass list
+            kategoriList = pilihanKategori,
             onBukuValueChange = viewModel::updateUiState,
             onSaveClick = {
                 coroutineScope.launch {
@@ -103,7 +102,7 @@ fun EntrySiswaScreen(
 @Composable
 fun EntryBukuBody(
     uiStateBuku: UIStateBuku,
-    kategoriList: List<Kategori>, // Receive list
+    kategoriList: List<Kategori>,
     onBukuValueChange: (DetailBuku) -> Unit,
     onSaveClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -114,7 +113,7 @@ fun EntryBukuBody(
     ) {
         FormInputBuku(
             detailBuku = uiStateBuku.detailBuku,
-            kategoriList = kategoriList, // Pass list
+            kategoriList = kategoriList,
             onValueChange = onBukuValueChange,
             modifier = Modifier.fillMaxWidth()
         )
@@ -133,7 +132,7 @@ fun EntryBukuBody(
 @Composable
 fun FormInputBuku(
     detailBuku: DetailBuku,
-    kategoriList: List<Kategori>, // Receive list
+    kategoriList: List<Kategori>,
     modifier: Modifier = Modifier,
     onValueChange: (DetailBuku) -> Unit = {},
     enabled: Boolean = true
@@ -165,7 +164,7 @@ fun FormInputBuku(
         )
         
 
-        // --- Dropdown Kategori ---
+
         ExposedDropdownMenuBox(
             expanded = expanded,
             onExpandedChange = { expanded = !expanded }

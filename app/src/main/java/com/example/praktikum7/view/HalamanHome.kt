@@ -48,7 +48,7 @@ fun HomeScreen(
     navigateToItemUpdate: (Int) -> Unit,
     navigateToKategori: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: HomeViewModel = viewModel(factory = PenediaViewModel.Factory)
+    viewModel: HomeViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
@@ -98,7 +98,6 @@ fun BodyHome(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
     ) {
-        // Category Menu Card
         Card(
             modifier = Modifier
                 .fillMaxWidth()
