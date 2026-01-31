@@ -20,4 +20,5 @@
     <string name="attention">Perhatian</string>
     <string name="tanya">Apakah anda yakin menghapus ini ?</string>
     <string name="entry_kategori">Tambah Kategori</string>
+    <string name="kategori">Kategori</string>
 </resources>

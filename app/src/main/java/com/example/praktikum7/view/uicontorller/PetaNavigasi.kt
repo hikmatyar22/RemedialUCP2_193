@@ -13,12 +13,14 @@ import com.example.praktikum7.view.DetailSiswaScreen
 import com.example.praktikum7.view.EditSiswaScreen
 import com.example.praktikum7.view.EntrySiswaScreen
 import com.example.praktikum7.view.HomeScreen
+import com.example.praktikum7.view.KategoriScreen
 import com.example.praktikum7.view.route.DestinasiDetailSiswa
 import com.example.praktikum7.view.route.DestinasiDetailSiswa.itemIdArg
 import com.example.praktikum7.view.route.DestinasiEditSiswa
 import com.example.praktikum7.view.route.DestinasiEntry
 import com.example.praktikum7.view.route.DestinasiEntryKategori
 import com.example.praktikum7.view.route.DestinasiHome
+import com.example.praktikum7.view.route.DestinasiKategori
 import com.example.praktikum7.view.EntryKategoriScreen
 
 @Composable
@@ -40,7 +42,8 @@ fun HostNavigasi(
                 //edit 1 : tambahkan parameter navigateToItemUpdate
                 navigateToItemUpdate = {
                     navController.navigate("${DestinasiDetailSiswa.route}/${it}")
-                }
+                },
+                navigateToKategori = { navController.navigate(DestinasiKategori.route) }
             )
         }
         composable(DestinasiEntry.route){
@@ -51,6 +54,14 @@ fun HostNavigasi(
         }
         composable(DestinasiEntryKategori.route){
             EntryKategoriScreen(navigateBack = { navController.popBackStack() })
+        }
+        composable(DestinasiKategori.route){
+            KategoriScreen(
+                onNavigateBack = { navController.popBackStack() },
+                onNavigateToBookDetail = { bookId ->
+                    navController.navigate("${DestinasiDetailSiswa.route}/${bookId}")
+                }
+            )
         }
         //edit 2 : tambahkan 2 composable route
         composable(route = DestinasiDetailSiswa.routeWithArgs,

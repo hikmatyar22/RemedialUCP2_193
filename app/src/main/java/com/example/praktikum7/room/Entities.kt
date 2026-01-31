@@ -95,3 +95,12 @@ data class AuditLog(
     val newValue: String? = null,
     val timestamp: Long = System.currentTimeMillis()
 )
+
+// Data class for hierarchical category queries
+data class KategoriWithLevel(
+    val id: Int,
+    val nama: String,
+    val deskripsi: String,
+    val parentId: Int?,
+    val level: Int
+)

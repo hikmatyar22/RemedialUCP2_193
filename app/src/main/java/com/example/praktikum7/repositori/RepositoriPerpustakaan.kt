@@ -3,6 +3,7 @@ package com.example.praktikum7.repositori
 import com.example.praktikum7.room.AuditLog
 import com.example.praktikum7.room.Buku
 import com.example.praktikum7.room.Kategori
+import com.example.praktikum7.room.KategoriWithLevel
 import com.example.praktikum7.room.PerpustakaanDao
 import kotlinx.coroutines.flow.Flow
 
@@ -14,6 +15,11 @@ interface RepositoriPerpustakaan {
     suspend fun updateKategori(kategori: Kategori)
     suspend fun deleteKategori(categoryId: Int, deleteBooks: Boolean) : Boolean // Boolean = Success
 
+    // New hierarchical category methods
+    fun getAllKategoriHierarchical(): Flow<List<KategoriWithLevel>>
+    fun getSubCategories(parentId: Int?): Flow<List<KategoriWithLevel>>
+    suspend fun getCategoryPath(categoryId: Int): List<KategoriWithLevel>
+    suspend fun getSubCategoryCount(categoryId: Int): Int
 
     fun getAllBuku(): Flow<List<Buku>>
     fun getBooksByCategoryRecursive(categoryId: Int): Flow<List<Buku>>
@@ -81,6 +87,18 @@ class OfflineRepositoriPerpustakaan(
         
         return true
     }
+
+    override fun getAllKategoriHierarchical(): Flow<List<KategoriWithLevel>> = 
+        perpustakaanDao.getAllKategoriHierarchical()
+
+    override fun getSubCategories(parentId: Int?): Flow<List<KategoriWithLevel>> = 
+        perpustakaanDao.getSubCategories(parentId)
+
+    override suspend fun getCategoryPath(categoryId: Int): List<KategoriWithLevel> = 
+        perpustakaanDao.getCategoryPath(categoryId)
+
+    override suspend fun getSubCategoryCount(categoryId: Int): Int = 
+        perpustakaanDao.getSubCategoryCount(categoryId)
 
     override fun getAllBuku(): Flow<List<Buku>> = perpustakaanDao.getAllBuku()
 
